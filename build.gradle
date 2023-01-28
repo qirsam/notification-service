@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+apply from: 'version.gradle'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework:spring-context-support:${versions.spring}"
+    implementation "org.springframework:spring-webmvc:${versions.spring}"
+    implementation "org.springframework.data:spring-data-jpa:${versions.spring_data_jpa}"
+    implementation "org.hibernate:hibernate-entitymanager:${versions.hibernate}"
+    implementation "org.postgresql:postgresql:${versions.postgresql}"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+}
+
+test {
+    useJUnitPlatform()
+}
