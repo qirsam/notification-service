@@ -48,6 +48,7 @@ public class SpringConfig {
         return dataSource;
     }
 
+
     private Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
