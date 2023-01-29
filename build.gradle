@@ -17,10 +17,15 @@ dependencies {
     implementation "org.springframework.data:spring-data-jpa:${versions.spring_data_jpa}"
     implementation "org.hibernate:hibernate-entitymanager:${versions.hibernate}"
     implementation "org.postgresql:postgresql:${versions.postgresql}"
+    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+    implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
 }
 
 test {
