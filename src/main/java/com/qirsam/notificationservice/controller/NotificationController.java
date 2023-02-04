@@ -8,8 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 
 @RestController
 @RequestMapping("/notifications")
@@ -18,26 +16,27 @@ public class NotificationController {
 
     private final NotificationService notificationService;
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello, World!";
-    }
-
     @GetMapping("/{userId}")
-    public ResponseEntity<List<NotificationReadDto>> findAllByUserId(@PathVariable Long userId) {
-        return ResponseEntity.ok(notificationService.findAllByUserId(userId));
+    public ResponseEntity<NotificationReadDto> findNotificationByUserIdAndTaskId(@PathVariable Long userId,
+                                                                                 @RequestParam Long taskId) {
+        return ResponseEntity.ok(notificationService.findNotificationByUserIdAndTaskId(userId, taskId));
     }
 
-    @GetMapping("/{userId}/tasks/{taskId}")
-    public ResponseEntity<NotificationReadDto> findAllByUserIdAndTaskId(@PathVariable Long userId,
-                                                                        @PathVariable Long taskId) {
-        return ResponseEntity.ok(notificationService.findAllByUserIdAndTaskId(userId, taskId));
-    }
 
-    @PostMapping("/")
-        public ResponseEntity<?> createNotification(@RequestBody NotificationCreateUpdateDto notification) {
+    @PostMapping
+    public ResponseEntity<?> createNotification(@RequestBody NotificationCreateUpdateDto notification) {
         notificationService.create(notification);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<?> deleteNotification(@PathVariable Long userId,
+                                                @RequestParam Long taskId) {
+        notificationService.delete(userId, taskId);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
