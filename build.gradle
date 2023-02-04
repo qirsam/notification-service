@@ -20,7 +20,11 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.5.3.Final'
     implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testImplementation "org.testcontainers:postgresql:1.17.6"
+    testImplementation "org.springframework:spring-test:${versions.spring}"
+    testImplementation 'org.assertj:assertj-core:3.23.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'

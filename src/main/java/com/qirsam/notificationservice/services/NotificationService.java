@@ -7,6 +7,7 @@ import com.qirsam.notificationservice.repositories.NotificationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -33,10 +34,16 @@ public class NotificationService {
                 .orElseThrow(() -> new EntityNotFoundException("Notification with id " + id + " not found"));
     }
 
+    public List<NotificationReadDto> findAllByUserId(Long id) {
+        return notificationRepository.findAllByUserId(id).stream()
+                .map(notificationMapper::toNotificationReadDto)
+                .collect(Collectors.toList());
+    }
+
     public NotificationReadDto create(NotificationCreateUpdateDto notificationCreateUpdateDto) {
         return Optional.of(notificationCreateUpdateDto)
                 .map(notificationMapper::toNotification)
-                .map(notificationRepository::save)
+                .map(notificationRepository::saveAndFlush)
                 .map(notificationMapper::toNotificationReadDto)
                 .orElseThrow();
     }
@@ -49,7 +56,7 @@ public class NotificationService {
                     notification.setTime(dto.time());
                     return notification;
                 })
-                .map(notificationRepository::save)
+                .map(notificationRepository::saveAndFlush)
                 .map(notificationMapper::toNotificationReadDto)
                 .orElseThrow(() -> new EntityNotFoundException("Notification with id " + id + " not found"));
     }
@@ -59,7 +66,12 @@ public class NotificationService {
             throw new EntityNotFoundException("Notification with id " + id + " not found");
         }
         notificationRepository.deleteById(id);
+        RestTemplate restTemplate = new RestTemplate();
     }
 
 
+    public NotificationReadDto findAllByUserIdAndTaskId(Long userId, Long taskId) {
+        return notificationRepository.findAllByUserIdAndTaskId(userId, taskId)
+                .orElseThrow(EntityNotFoundException::new);
+    }
 }

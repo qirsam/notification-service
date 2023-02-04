@@ -15,12 +15,15 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@Table(name = "notification")
 public class Notification {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    @Column(name = "user_id", nullable = false)
     private Long userId;
+    @Column(name = "task_id", nullable = false)
     private Long taskId;
     private LocalTime time;
 

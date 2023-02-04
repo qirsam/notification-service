@@ -6,10 +6,15 @@ import com.qirsam.notificationservice.models.Notification;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface NotificationMapper {
     @Mapping(target = "id", ignore = true)
     Notification toNotification(NotificationCreateUpdateDto dto);
 
     NotificationReadDto toNotificationReadDto(Notification notification);
+
+//    List<NotificationReadDto> toListNotificationsReadDto(List<NotificationReadDto> dtos);
+    // FIXME: 03.02.2023
 }
