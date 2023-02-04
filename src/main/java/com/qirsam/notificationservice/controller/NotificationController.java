@@ -1,4 +1,4 @@
-package com.qirsam.controller;
+package com.qirsam.notificationservice.controller;
 
 import com.qirsam.notificationservice.dto.NotificationCreateUpdateDto;
 import com.qirsam.notificationservice.dto.NotificationReadDto;
@@ -17,6 +17,11 @@ import java.util.List;
 public class NotificationController {
 
     private final NotificationService notificationService;
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello, World!";
+    }
 
     @GetMapping("/{userId}")
     public ResponseEntity<List<NotificationReadDto>> findAllByUserId(@PathVariable Long userId) {

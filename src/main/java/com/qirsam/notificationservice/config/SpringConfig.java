@@ -13,6 +13,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -20,9 +21,10 @@ import java.util.Properties;
 @Configuration
 @ComponentScan("com.qirsam.notificationservice")
 @PropertySource("classpath:hibernate.properties")
-@EnableTransactionManagement
 @EnableJpaRepositories("com.qirsam.notificationservice.repositories")
 @RequiredArgsConstructor
+@EnableTransactionManagement
+@EnableWebMvc
 public class SpringConfig {
 
     private final Environment environment;

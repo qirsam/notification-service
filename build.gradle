@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'war'
 }
 
 group 'org.example'
@@ -7,18 +8,22 @@ version '1.0-SNAPSHOT'
 
 apply from: 'version.gradle'
 
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation "org.springframework:spring-context-support:${versions.spring}"
     implementation "org.springframework:spring-webmvc:${versions.spring}"
     implementation "org.springframework.data:spring-data-jpa:${versions.spring_data_jpa}"
     implementation "org.hibernate:hibernate-entitymanager:${versions.hibernate}"
     implementation "org.postgresql:postgresql:${versions.postgresql}"
     implementation 'org.mapstruct:mapstruct:1.5.3.Final'
     implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
+
+    implementation 'org.slf4j:slf4j-api:2.0.6'
+    implementation 'org.slf4j:slf4j-simple:2.0.6'
 
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
@@ -27,8 +32,11 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.23.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     compileOnly 'org.projectlombok:lombok:1.18.24'
+    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
+
 }
 
 test {
